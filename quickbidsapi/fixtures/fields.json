@@ -1,0 +1,44 @@
+[
+    {
+        "model": "quickbidsapi.field",
+        "pk": 1,
+        "fields": {
+            "job_title": "Painting"
+        }
+    },
+    {
+        "model": "quickbidsapi.field",
+        "pk": 2,
+        "fields": {
+            "job_title": "Drywall"
+        }
+    },
+    {
+        "model": "quickbidsapi.field",
+        "pk": 3,
+        "fields": {
+            "job_title": "Epoxy Flooring"
+        }
+    },
+    {
+        "model": "quickbidsapi.field",
+        "pk": 4,
+        "fields": {
+            "job_title": "Electrical"
+        }
+    },
+    {
+        "model": "quickbidsapi.field",
+        "pk": 5,
+        "fields": {
+            "job_title": "Furniture"
+        }
+    },
+    {
+        "model": "quickbidsapi.field",
+        "pk": 6,
+        "fields": {
+            "job_title": "Carpeting"
+        }
+    }
+]

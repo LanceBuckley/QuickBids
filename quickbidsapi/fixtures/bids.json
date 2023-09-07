@@ -1,0 +1,132 @@
+[
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 1,
+        "fields": {
+            "rate": 19,
+            "job": 1,
+            "contractor": 4,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 2,
+        "fields": {
+            "rate": 20,
+            "job": 1,
+            "contractor": 5,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 3,
+        "fields": {
+            "rate": 18,
+            "job": 2,
+            "contractor": 6,
+            "accepted": true
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 4,
+        "fields": {
+            "rate": 22,
+            "job": 4,
+            "contractor": 4,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 5,
+        "fields": {
+            "rate": 23,
+            "job": 3,
+            "contractor": 5,
+            "accepted": true
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 6,
+        "fields": {
+            "rate": 22,
+            "job": 4,
+            "contractor": 6,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 7,
+        "fields": {
+            "rate": 19,
+            "job": 5,
+            "contractor": 4,
+            "accepted": true
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 8,
+        "fields": {
+            "rate": 21,
+            "job": 7,
+            "contractor": 5,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 9,
+        "fields": {
+            "rate": 17,
+            "job": 7,
+            "contractor": 6,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 10,
+        "fields": {
+            "rate": 19,
+            "job": 8,
+            "contractor": 4,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 11,
+        "fields": {
+            "rate": 19,
+            "job": 8,
+            "contractor": 5,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 12,
+        "fields": {
+            "rate": 19,
+            "job": 8,
+            "contractor": 6,
+            "accepted": false
+        }
+    },
+    {
+        "model": "quickbidsapi.bid",
+        "pk": 13,
+        "fields": {
+            "rate": 19,
+            "job": 6,
+            "contractor": 6,
+            "accepted": true
+        }
+    }
+]
