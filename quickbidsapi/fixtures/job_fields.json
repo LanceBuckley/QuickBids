@@ -1,0 +1,98 @@
+[
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 1,
+        "fields": {
+            "job": 1,
+            "field": 1
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 2,
+        "fields": {
+            "job": 1,
+            "field": 2
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 3,
+        "fields": {
+            "job": 2,
+            "field": 1
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 4,
+        "fields": {
+            "job": 3,
+            "field": 1
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 5,
+        "fields": {
+            "job": 3,
+            "field": 3
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 6,
+        "fields": {
+            "job": 4,
+            "field": 5
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 7,
+        "fields": {
+            "job": 5,
+            "field": 6
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 8,
+        "fields": {
+            "job": 5,
+            "field": 3
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 9,
+        "fields": {
+            "job": 6,
+            "field": 2
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 10,
+        "fields": {
+            "job": 6,
+            "field": 4
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 11,
+        "fields": {
+            "job": 7,
+            "field": 1
+        }
+    },
+    {
+        "model": "quickbidsapi.jobfield",
+        "pk": 12,
+        "fields": {
+            "job": 8,
+            "field": 1
+        }
+    }
+]

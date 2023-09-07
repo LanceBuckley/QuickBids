@@ -6,7 +6,7 @@ class Contractor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=10)
-    primary_contractor = models.BooleanField
+    primary_contractor = models.BooleanField(default=False)
 
     @property
     def full_name(self):
