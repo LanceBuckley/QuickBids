@@ -1,0 +1,106 @@
+[
+    {
+        "model": "quickbidsapi.job",
+        "pk": 1,
+        "fields": {
+            "contractor": 1,
+            "name": "EyeMasters",
+            "address": "321 Iris Boulevard",
+            "blueprint": "",
+            "square_footage": 1,
+            "open": true,
+            "complete": false
+        }
+    },
+    {
+        "model": "quickbidsapi.job",
+        "pk": 2,
+        "fields": {
+            "contractor": 1,
+            "name": "Tanay Building Group",
+            "address": "555-1234",
+            "blueprint": "",
+            "square_footage": 1,
+            "open": false,
+            "complete": true
+        }
+    },
+    {
+        "model": "quickbidsapi.job",
+        "pk": 3,
+        "fields": {
+            "contractor": 1,
+            "name": "Tanay Building Group",
+            "address": "555-1234",
+            "blueprint": "",
+            "square_footage": 1,
+            "open": true,
+            "complete": false
+        }
+    },
+    {
+        "model": "quickbidsapi.job",
+        "pk": 4,
+        "fields": {
+            "contractor": 2,
+            "name": "Tanay Building Group",
+            "address": "555-1234",
+            "blueprint": "",
+            "square_footage": 1,
+            "open": true,
+            "complete": false
+        }
+    },
+    {
+        "model": "quickbidsapi.job",
+        "pk": 5,
+        "fields": {
+            "contractor": 2,
+            "name": "Tanay Building Group",
+            "address": "555-1234",
+            "blueprint": "",
+            "square_footage": 1,
+            "open": true,
+            "complete": false
+        }
+    },
+    {
+        "model": "quickbidsapi.job",
+        "pk": 6,
+        "fields": {
+            "contractor": 2,
+            "name": "Tanay Building Group",
+            "address": "555-1234",
+            "blueprint": "",
+            "square_footage": 1,
+            "open": true,
+            "complete": false
+        }
+    },
+    {
+        "model": "quickbidsapi.job",
+        "pk": 7,
+        "fields": {
+            "contractor": 3,
+            "name": "Tanay Building Group",
+            "address": "555-1234",
+            "blueprint": "",
+            "square_footage": 1,
+            "open": true,
+            "complete": false
+        }
+    },
+    {
+        "model": "quickbidsapi.job",
+        "pk": 8,
+        "fields": {
+            "contractor": 3,
+            "name": "Tanay Building Group",
+            "address": "555-1234",
+            "blueprint": "",
+            "square_footage": 1,
+            "open": true,
+            "complete": false
+        }
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "model": "quickbidsapi.contractor",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "company_name": "Tanay Building Group",
+            "phone_number": "555-1234",
+            "primary_contractor": true
+        }
+    },
+    {
+        "model": "quickbidsapi.contractor",
+        "pk": 2,
+        "fields": {
+            "user": 1,
+            "company_name": "Ducharme Construction",
+            "phone_number": "555-5678",
+            "primary_contractor": true
+        }
+    },
+    {
+        "model": "quickbidsapi.contractor",
+        "pk": 3,
+        "fields": {
+            "user": 1,
+            "company_name": "Sole Builders",
+            "phone_number": "555-7890",
+            "primary_contractor": true
+        }
+    },
+    {
+        "model": "quickbidsapi.contractor",
+        "pk": 4,
+        "fields": {
+            "user": 1,
+            "company_name": "Nilson Painting",
+            "phone_number": "555-4321",
+            "primary_contractor": false
+        }
+    },
+    {
+        "model": "quickbidsapi.contractor",
+        "pk": 5,
+        "fields": {
+            "user": 1,
+            "company_name": "Lemmon LTC",
+            "phone_number": "555-6789",
+            "primary_contractor": false
+        }
+    },
+    {
+        "model": "quickbidsapi.contractor",
+        "pk": 6,
+        "fields": {
+            "user": 1,
+            "company_name": "Hillard Flooring",
+            "phone_number": "555-7654",
+            "primary_contractor": false
+        }
+    }
+]
