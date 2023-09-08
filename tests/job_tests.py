@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 class JobTests(APITestCase):
 
     fixtures = ['users', 'tokens', 'contractors',
-               'jobs', 'fields', 'job_fields', 'bids']
+                'jobs', 'fields', 'job_fields', 'bids']
 
     def setUp(self):
 
@@ -68,8 +68,25 @@ class JobTests(APITestCase):
         Ensure we can get an existing job
         """
 
+        # Define the endpoint in the API to which
+        # the request will be sent
+        url = "/jobs"
+
+        # Define the request body
+        data = {
+            "fields": [1, 2, 3],
+            "name": "Test Job",
+            "address": "123 Testing Rd.",
+            "blueprint": "",
+            "square_footage": 1700
+        }
+
         # Initiate request and store response
-        response = self.client.get(f"/jobs/{1}")
+        self.client.post(url, data, format='json')
+        job = Job.objects.last()
+
+        # Initiate request and store response
+        response = self.client.get(f"/jobs/{job.id}")
 
         # Parse the JSON in the response body
         json_response = json.loads(response.content)
@@ -78,12 +95,17 @@ class JobTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Assert that the values are correct
-        self.assertEqual(json_response["name"], "EyeMasters")
-        self.assertEqual(json_response["address"], "321 Iris Boulevard")
+        self.assertEqual(json_response["name"], "Test Job")
+        self.assertEqual(json_response["address"], "123 Testing Rd.")
         self.assertEqual(
             json_response["contractor"], {"id": 1, "company_name": "Tanay Building Group"})
+        self.assertEqual(
+            json_response["fields"],
+            [{"id": 1, "job_title": "Painting"}, {"id": 2, "job_title": "Drywall"},
+                {"id": 3, "job_title": "Epoxy Flooring"}]
+        )
         self.assertEqual(json_response["blueprint"], None)
-        self.assertEqual(json_response["square_footage"], 2500.0)
+        self.assertEqual(json_response["square_footage"], 1700.0)
         self.assertEqual(json_response["open"], True)
         self.assertEqual(json_response["complete"], False)
 

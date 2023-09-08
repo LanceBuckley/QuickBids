@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 class BidTests(APITestCase):
 
     fixtures = ['users', 'tokens', 'contractors',
-               'jobs', 'fields', 'job_fields', 'bids']
+                'jobs', 'fields', 'job_fields', 'bids']
 
     def setUp(self):
         # Try to retrieve the first existing Contractor object
@@ -26,9 +26,6 @@ class BidTests(APITestCase):
         # Define the endpoint in the API to which
         # the request will be sent
         url = "/bids"
-
-        # Seed the database with a job
-        job = Job.objects.create(name="OptiNova Solutions")
 
         # Define the request body
         data = {
@@ -52,7 +49,7 @@ class BidTests(APITestCase):
             "name": "EyeMasters"
         })
         self.assertEqual(
-            json_response["contractor"], Contractor.objects.last())
+            json_response["contractor"], {'id': 1, 'company_name': 'Tanay Building Group'})
         self.assertEqual(json_response["accepted"], False)
 
     def test_get_bid(self):
@@ -60,8 +57,17 @@ class BidTests(APITestCase):
         Ensure we can get an existing bid
         """
 
-        # Seed the database with a bid
-        bid = Bid.objects.create(rate=17, job=1)
+        url = "/bids"
+
+        # Define the request body
+        data = {
+            "rate": 17,
+            "job": 1,
+        }
+
+        # Initiate request and store response
+        self.client.post(url, data, format='json')
+        bid = Bid.objects.last()
 
         # Initiate request and store response
         response = self.client.get(f"/bids/{bid.id}")
@@ -74,9 +80,12 @@ class BidTests(APITestCase):
 
         # Assert that the values are correct
         self.assertEqual(json_response["rate"], 17)
-        self.assertEqual(json_response["job"], 1)
+        self.assertEqual(json_response["job"], {
+            "id": 1,
+            "name": "EyeMasters"
+        })
         self.assertEqual(
-            json_response["contractor"], Contractor.objects.last())
+            json_response["contractor"], {'id': 1, 'company_name': 'Tanay Building Group'})
         self.assertEqual(json_response["accepted"], False)
 
     def test_change_bid(self):
@@ -84,14 +93,23 @@ class BidTests(APITestCase):
         Ensure we can change an existing bid.
         """
 
-        # Seed the database with a bid
-        bid = Bid.objects.create(rate=17, job=1)
+        url = "/bids"
 
-        # DEFINE NEW PROPERTIES FOR GAME
+        # Define the request body
+        data = {
+            "rate": 17,
+            "job": 1,
+        }
+
+        # Initiate request and store response
+        self.client.post(url, data, format='json')
+        bid = Bid.objects.last()
+
+        # DEFINE NEW PROPERTIES FOR BID
         data = {
             "rate": 19,
-            "job": {3, "OptiNova Solutions"},
-            "contractor": {4, "Nilson Painting"},
+            "job": 3,
+            "contractor": 4,
             "accepted": True
         }
 
@@ -106,8 +124,8 @@ class BidTests(APITestCase):
         # Assert that the properties are correct
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(json_response["rate"], 19)
-        self.assertEqual(json_response["job"], {3, "OptiNova Solutions"})
-        self.assertEqual(json_response["contractor"], {4, "Nilson Painting"})
+        self.assertEqual(json_response["job"], {'id': 3, 'name': 'OptiNova Solutions'})
+        self.assertEqual(json_response["contractor"], {'id': 4, 'company_name': 'Nilson Painting'})
         self.assertEqual(json_response["accepted"], True)
 
     def test_delete_bid(self):
@@ -115,8 +133,17 @@ class BidTests(APITestCase):
         Ensure we can delete an existing bid.
         """
 
-        # Seed the database with a bid
-        bid = Bid.objects.create(rate=17, job=1)
+        url = "/bids"
+
+        # Define the request body
+        data = {
+            "rate": 17,
+            "job": 1,
+        }
+
+        # Initiate request and store response
+        self.client.post(url, data, format='json')
+        bid = Bid.objects.last()
 
         # DELETE the bid you just created
         response = self.client.delete(f"/bids/{bid.id}")
