@@ -43,6 +43,26 @@ class FieldView(ViewSet):
         except Field.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    def create(self, request):
+        """
+        Summary:
+            Create a new object using the request data
+
+        Args:
+            request (HttpRequest): The full HTTP request object.
+            pk (int): The primary key of the field to retrieve.
+
+        Returns:
+            Response: A serialized dictionary containing the field's data and HTTP status 201 Created.
+        """
+
+        field = Field.objects.create(
+            job_title=request.data["job_title"]
+        )
+
+        serializer = FieldSerializer(field, many=False)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     def update(self, request, pk=None):
         """
         Summary:
