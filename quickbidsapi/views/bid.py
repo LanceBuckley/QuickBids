@@ -84,7 +84,7 @@ class BidView(ViewSet):
         try:
             bid = Bid.objects.get(pk=pk)
             bid.job = Job.objects.get(pk=request.data["job"])
-            bid.job = Contractor.objects.get(pk=request.data["contractor"])
+            bid.contractor = Contractor.objects.get(pk=request.data["contractor"])
             bid.rate = request.data["rate"]
             bid.accepted = request.data["accepted"]
             bid.save()
@@ -117,13 +117,13 @@ class BidView(ViewSet):
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
-        bids = ('id', 'name',)
+        fields = ('id', 'name',)
 
 
 class ContractorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contractor
-        bids = ('id', 'company_name',)
+        fields = ('id', 'company_name',)
 
 
 class BidSerializer(serializers.ModelSerializer):
@@ -133,4 +133,4 @@ class BidSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bid
-        bids = ('id', 'rate', 'job', 'contractor', 'accepted')
+        fields = ('id', 'rate', 'job', 'contractor', 'accepted')

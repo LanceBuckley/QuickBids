@@ -2,11 +2,11 @@ import json
 from rest_framework import status
 from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
-from quickbidsapi.models import Contractor, Field
+from quickbidsapi.models import Contractor, Bid, Job
 from rest_framework.authtoken.models import Token
 
 
-class FieldTests(APITestCase):
+class BidTests(APITestCase):
 
     fixture = ['users', 'tokens', 'contractors',
                'jobs', 'fields', 'job_fields', 'bids']
@@ -27,17 +27,18 @@ class FieldTests(APITestCase):
         # Set the client's credentials using the Token
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
 
-    def test_create_field(self):
+    def test_create_bid(self):
         """
-        Ensure we can create a new field.
+        Ensure we can create a new bid.
         """
         # Define the endpoint in the API to which
         # the request will be sent
-        url = "/fields"
+        url = "/bids"
 
         # Define the request body
         data = {
-            "job_title": "Complainer",
+            "rate": 17,
+            "job": 1,
         }
 
         # Initiate request and store response
@@ -50,65 +51,82 @@ class FieldTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Assert that the properties on the created resource are correct
-        self.assertEqual(json_response["job_title"], "Complainer")
+        self.assertEqual(json_response["rate"], 17)
+        self.assertEqual(json_response["job"], {
+            "id": 1,
+            "name": "EyeMasters"
+        })
+        self.assertEqual(
+            json_response["contractor"], Contractor.objects.last())
+        self.assertEqual(json_response["accepted"], False)
 
-    def test_get_field(self):
+    def test_get_bid(self):
         """
-        Ensure we can get an existing field
+        Ensure we can get an existing bid
         """
 
-        # Seed the database with a field
-        field = Field.objects.create(job_title="Complainer")
+        # Seed the database with a bid
+        bid = Bid.objects.create(rate=17, job=1)
 
         # Initiate request and store response
-        response = self.client.get(f"/fields/{field.id}")
+        response = self.client.get(f"/bids/{bid.id}")
 
         # Parse the JSON in the response body
         json_response = json.loads(response.content)
 
-        # Assert that the field was retrieved
+        # Assert that the bid was retrieved
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Assert that the values are correct
-        self.assertEqual(json_response["job_title"], "Complainer")
+        self.assertEqual(json_response["rate"], 17)
+        self.assertEqual(json_response["job"], 1)
+        self.assertEqual(
+            json_response["contractor"], Contractor.objects.last())
+        self.assertEqual(json_response["accepted"], False)
 
-    def test_change_field(self):
+    def test_change_bid(self):
         """
-        Ensure we can change an existing field.
+        Ensure we can change an existing bid.
         """
 
-        # Seed the database with a field
-        field = Field.objects.create(job_title="Complainer")
+        # Seed the database with a bid
+        bid = Bid.objects.create(rate=17, job=1)
 
         # DEFINE NEW PROPERTIES FOR GAME
         data = {
-            "job_title": "Manager",
+            "rate": 19,
+            "job": {3, "OptiNova Solutions"},
+            "contractor": {4, "Nilson Painting"},
+            "accepted": True
         }
 
         response = self.client.put(
-            f"/fields/{field.id}", data, format="json")
+            f"/bids/{bid.id}", data, format="json")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-        # GET field again to verify changes were made
-        response = self.client.get(f"/fields/{field.id}")
+        # GET bid again to verify changes were made
+        response = self.client.get(f"/bids/{bid.id}")
         json_response = json.loads(response.content)
 
         # Assert that the properties are correct
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(json_response["job_title"], "Manager")
+        self.assertEqual(json_response["rate"], 19)
+        self.assertEqual(json_response["job"], {3, "OptiNova Solutions"})
+        self.assertEqual(json_response["contractor"], {4, "Nilson Painting"})
+        self.assertEqual(json_response["accepted"], True)
 
-    def test_delete_field(self):
+    def test_delete_bid(self):
         """
-        Ensure we can delete an existing field.
+        Ensure we can delete an existing bid.
         """
 
-        # Seed the database with a field
-        field = Field.objects.create(job_title="Complainer")
+        # Seed the database with a bid
+        bid = Bid.objects.create(rate=17, job=1)
 
-        # DELETE the field you just created
-        response = self.client.delete(f"/fields/{field.id}")
+        # DELETE the bid you just created
+        response = self.client.delete(f"/bids/{bid.id}")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-        # GET the field again to verify you get a 404 response
-        response = self.client.get(f"/fields/{field.id}")
+        # GET the bid again to verify you get a 404 response
+        response = self.client.get(f"/bids/{bid.id}")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

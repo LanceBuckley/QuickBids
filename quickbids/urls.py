@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
 from rest_framework import routers
-from quickbidsapi.views import ContractorView, FieldView
+from quickbidsapi.views import ContractorView, FieldView, BidView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'contractors', ContractorView, 'contractor')
 router.register(r'fields', FieldView, 'field')
+router.register(r'bids', BidView, 'bid')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
