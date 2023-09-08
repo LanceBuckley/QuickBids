@@ -8,18 +8,12 @@ from rest_framework.authtoken.models import Token
 
 class FieldTests(APITestCase):
 
-    fixture = ['users', 'tokens', 'contractors',
+    fixtures = ['users', 'tokens', 'contractors',
                'jobs', 'fields', 'job_fields', 'bids']
 
     def setUp(self):
         # Try to retrieve the first existing Contractor object
         self.contractor = Contractor.objects.first()
-
-        if self.contractor is None:
-            # If no Contractor exists, create one
-            self.user = User.objects.create(username="testuser")
-            self.contractor = Contractor.objects.create(
-                user=self.user, company_name="Test Company")
 
         # Create a Token for the user if it doesn't exist
         token, created = Token.objects.get_or_create(user=self.contractor.user)

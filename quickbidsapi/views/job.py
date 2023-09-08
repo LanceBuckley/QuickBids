@@ -60,7 +60,6 @@ class JobView(ViewSet):
 
         job = Job.objects.create(
             contractor=contractor,
-            fields=fields,
             name=request.data["name"],
             address=request.data["address"],
             blueprint=request.data["blueprint"],
@@ -68,6 +67,8 @@ class JobView(ViewSet):
             open=True,
             complete=False,
         )
+
+        job.fields.set(fields)
 
         serializer = JobSerializer(job, many=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -137,7 +138,7 @@ class ContractorSerializer(serializers.ModelSerializer):
 
 class JobSerializer(serializers.ModelSerializer):
 
-    field = FieldSerializer(many=True)
+    fields = FieldSerializer(many=True)
     contractor = ContractorSerializer(many=False)
 
     class Meta:
