@@ -35,6 +35,9 @@ class BidTests(APITestCase):
         # the request will be sent
         url = "/bids"
 
+        # Seed the database with a job
+        job = Job.objects.create(name="OptiNova Solutions")
+
         # Define the request body
         data = {
             "rate": 17,

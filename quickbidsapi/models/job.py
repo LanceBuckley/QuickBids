@@ -6,7 +6,7 @@ class Job(models.Model):
         "Contractor", on_delete=models.CASCADE, related_name="my_jobs")
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
-    field = models.ManyToManyField("Field", through='JobField')
+    fields = models.ManyToManyField("Field", through='JobField')
     blueprint = models.ImageField(null=True, blank=True)
     square_footage = models.FloatField(null=True, blank=True)
     open = models.BooleanField(null=True, blank=True)
