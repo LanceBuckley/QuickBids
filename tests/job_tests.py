@@ -68,11 +68,8 @@ class JobTests(APITestCase):
         Ensure we can get an existing job
         """
 
-        # Seed the database with a job
-        job = Job.objects.create(rate=17, job=1)
-
         # Initiate request and store response
-        response = self.client.get(f"/jobs/{job.id}")
+        response = self.client.get(f"/jobs/{1}")
 
         # Parse the JSON in the response body
         json_response = json.loads(response.content)
@@ -81,26 +78,47 @@ class JobTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         # Assert that the values are correct
-        self.assertEqual(json_response["rate"], 17)
-        self.assertEqual(json_response["job"], 1)
+        self.assertEqual(json_response["name"], "EyeMasters")
+        self.assertEqual(json_response["address"], "321 Iris Boulevard")
         self.assertEqual(
-            json_response["contractor"], Contractor.objects.last())
-        self.assertEqual(json_response["accepted"], False)
+            json_response["contractor"], {"id": 1, "company_name": "Tanay Building Group"})
+        self.assertEqual(json_response["blueprint"], None)
+        self.assertEqual(json_response["square_footage"], 2500.0)
+        self.assertEqual(json_response["open"], True)
+        self.assertEqual(json_response["complete"], False)
 
     def test_change_job(self):
         """
         Ensure we can change an existing job.
         """
 
-        # Seed the database with a job
-        job = Job.objects.create(rate=17, job=1)
+        # Define the endpoint in the API to which
+        # the request will be sent
+        url = "/jobs"
+
+        # Define the request body
+        data = {
+            "fields": [1, 2, 3],
+            "name": "Test Job",
+            "address": "123 Testing Rd.",
+            "blueprint": "",
+            "square_footage": 1700
+        }
+
+        # Initiate request and store response
+        self.client.post(url, data, format='json')
+        job = Job.objects.last()
 
         # DEFINE NEW PROPERTIES FOR GAME
         data = {
-            "rate": 19,
-            "job": {3, "OptiNova Solutions"},
-            "contractor": {4, "Nilson Painting"},
-            "accepted": True
+            "contractor": 3,
+            "fields": [4, 5, 6],
+            "name": "New Job",
+            "address": "456 Testing Dr.",
+            "blueprint": "",
+            "square_footage": 1900,
+            "complete": True,
+            "open": False
         }
 
         response = self.client.put(
@@ -112,19 +130,38 @@ class JobTests(APITestCase):
         json_response = json.loads(response.content)
 
         # Assert that the properties are correct
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(json_response["rate"], 19)
-        self.assertEqual(json_response["job"], {3, "OptiNova Solutions"})
-        self.assertEqual(json_response["contractor"], {4, "Nilson Painting"})
-        self.assertEqual(json_response["accepted"], True)
+        self.assertEqual(json_response["name"], "New Job")
+        self.assertEqual(json_response["address"], "456 Testing Dr.")
+        self.assertEqual(
+            json_response["contractor"], {"id": 3, "company_name": "Sole Builders"})
+        self.assertEqual(json_response["blueprint"], None)
+        self.assertEqual(json_response["square_footage"], 1900.0)
+        self.assertEqual(json_response["open"], False)
+        self.assertEqual(json_response["complete"], True)
 
     def test_delete_job(self):
         """
         Ensure we can delete an existing job.
         """
 
-        # Seed the database with a job
-        job = Job.objects.create(rate=17, job=1)
+        # Define the endpoint in the API to which
+        # the request will be sent
+        url = "/jobs"
+
+        # Define the request body
+        data = {
+            "fields": [1, 2, 3],
+            "name": "Test Job",
+            "address": "123 Testing Rd.",
+            "blueprint": "",
+            "square_footage": 1700
+        }
+
+        # Initiate request and store response
+        response = self.client.post(url, data, format='json')
+
+        # Parse the JSON in the response body
+        job = Job.objects.last()
 
         # DELETE the job you just created
         response = self.client.delete(f"/jobs/{job.id}")

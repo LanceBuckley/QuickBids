@@ -88,15 +88,16 @@ class JobView(ViewSet):
         """
         try:
             job = Job.objects.get(pk=pk)
+            fields = Field.objects.filter(pk__in=request.data["fields"])
             job.contractor = Contractor.objects.get(
                 pk=request.data["contractor"])
-            job.fields = Field.objects.filter(pk__in=request.data["fields"])
             job.name = request.data["name"]
             job.address = request.data["address"]
             job.blueprint = request.data["blueprint"]
             job.square_footage = request.data["square_footage"]
             job.open = request.data["open"]
             job.complete = request.data["complete"]
+            job.fields.set(fields)
             job.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except Job.DoesNotExist:
