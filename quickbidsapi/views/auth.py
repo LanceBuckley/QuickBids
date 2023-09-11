@@ -27,11 +27,13 @@ def login_user(request):
     # If authentication was successful, respond with their token
     if authenticated_user is not None and authenticated_user.is_active:
         token = Token.objects.get(user=authenticated_user)
+        contractor = Contractor.objects.get(user=authenticated_user)
 
         data = {
             'valid': True,
             'token': token.key,
-            'staff': authenticated_user.is_staff
+            'staff': authenticated_user.is_staff,
+            'primary': contractor.primary_contractor
         }
         return Response(data)
     else:
