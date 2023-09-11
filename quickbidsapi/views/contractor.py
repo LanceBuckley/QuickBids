@@ -27,7 +27,7 @@ class ContractorView(ViewSet):
                 contractors = contractors.filter(primary_contractor=False)
 
         if "current" in request.query_params:
-            contractor = contractor.filter(user=request.auth.user)
+            contractors = contractors.filter(user=request.auth.user)
 
         serializer = ContractorSerializer(contractors, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
