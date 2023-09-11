@@ -20,6 +20,14 @@ class JobView(ViewSet):
         """
         jobs = Job.objects.all()
 
+        if "contractor" in request.query_params:
+            jobs = jobs.filter(contractor=request.query_params.get('contractor'))
+        if request.query_params.get('open') is not None:
+            if request.query_params.get('open') == 'true':
+                jobs = jobs.filter(open=True)
+            elif request.query_params.get('open') == 'false':
+                jobs = jobs.filter(open=False)
+
         serializer = JobSerializer(jobs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
