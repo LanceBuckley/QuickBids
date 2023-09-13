@@ -31,7 +31,8 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
-            "contractor": self.contractor.id
+            "contractor": self.contractor.id,
+            "is_request": False
         }
 
         # Initiate request and store response
@@ -52,6 +53,7 @@ class BidTests(APITestCase):
         self.assertEqual(
             json_response["contractor"], {'id': 1, 'company_name': 'Tanay Building Group'})
         self.assertEqual(json_response["accepted"], False)
+        self.assertEqual(json_response["is_request"], False)
 
     def test_get_bid(self):
         """
@@ -64,7 +66,8 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
-            "contractor": self.contractor.id
+            "contractor": self.contractor.id,
+            "is_request": False
         }
 
         # Initiate request and store response
@@ -89,6 +92,7 @@ class BidTests(APITestCase):
         self.assertEqual(
             json_response["contractor"], {'id': 1, 'company_name': 'Tanay Building Group'})
         self.assertEqual(json_response["accepted"], False)
+        self.assertEqual(json_response["is_request"], False)
 
     def test_change_bid(self):
         """
@@ -101,7 +105,8 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
-            "contractor": self.contractor.id
+            "contractor": self.contractor.id,
+            "is_request": False
         }
 
         # Initiate request and store response
@@ -132,6 +137,7 @@ class BidTests(APITestCase):
         self.assertEqual(json_response["contractor"], {
                          'id': 4, 'company_name': 'Nilson Painting'})
         self.assertEqual(json_response["accepted"], True)
+        self.assertEqual(json_response["is_request"], False)
 
     def test_delete_bid(self):
         """
@@ -144,7 +150,8 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
-            "contractor": self.contractor.id
+            "contractor": self.contractor.id,
+            "is_request": False
         }
 
         # Initiate request and store response
