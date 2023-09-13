@@ -8,3 +8,4 @@ class Bid(models.Model):
     contractor = models.ForeignKey(
         "Contractor", on_delete=models.CASCADE, related_name="my_bids")
     accepted = models.BooleanField(default=False)
+    request = models.BooleanField(default=False)

@@ -27,6 +27,11 @@ class JobView(ViewSet):
                 jobs = jobs.filter(open=True)
             elif request.query_params.get('open') == 'false':
                 jobs = jobs.filter(open=False)
+        if request.query_params.get('complete') is not None:
+            if request.query_params.get('complete') == 'true':
+                jobs = jobs.filter(complete=True)
+            elif request.query_params.get('complete') == 'false':
+                jobs = jobs.filter(complete=False)
 
         serializer = JobSerializer(jobs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -46,6 +51,13 @@ class JobView(ViewSet):
         """
         try:
             job = Job.objects.get(pk=pk)
+
+            if "complete" in request.query_params:
+                if job.complete == bool(request.query_params.get('complete')):
+                    serializer = JobSerializer(job, many=False)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                return Response(status=status.HTTP_404_NOT_FOUND)
+
             serializer = JobSerializer(job, many=False)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Job.DoesNotExist:
