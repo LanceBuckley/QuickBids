@@ -19,11 +19,16 @@ class BidView(ViewSet):
             Response: A serialized dictionary and HTTP status 200 OK.
         """
         bids = Bid.objects.all()
-
+        
         if "contractor" in request.query_params:
             bids = bids.filter(contractor=request.query_params.get('contractor'))
+        if "job" in request.query_params:
+            bids = bids.filter(job=request.query_params.get('job'))
         if "accepted" in request.query_params:
             bids = bids.filter(accepted=request.query_params.get('accepted'))
+        
+        if bids.count() == 0:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = BidSerializer(bids, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
