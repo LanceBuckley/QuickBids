@@ -31,6 +31,7 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
+            "contractor": self.contractor.id
         }
 
         # Initiate request and store response
@@ -63,6 +64,7 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
+            "contractor": self.contractor.id
         }
 
         # Initiate request and store response
@@ -82,7 +84,7 @@ class BidTests(APITestCase):
         self.assertEqual(json_response["rate"], 17)
         self.assertEqual(json_response["job"], {
             "id": 1,
-            "name": "EyeMasters"
+            "name": "EyeMasters",
         })
         self.assertEqual(
             json_response["contractor"], {'id': 1, 'company_name': 'Tanay Building Group'})
@@ -99,6 +101,7 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
+            "contractor": self.contractor.id
         }
 
         # Initiate request and store response
@@ -124,8 +127,10 @@ class BidTests(APITestCase):
         # Assert that the properties are correct
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(json_response["rate"], 19)
-        self.assertEqual(json_response["job"], {'id': 3, 'name': 'OptiNova Solutions'})
-        self.assertEqual(json_response["contractor"], {'id': 4, 'company_name': 'Nilson Painting'})
+        self.assertEqual(json_response["job"], {
+                         'id': 3, 'name': 'OptiNova Solutions'})
+        self.assertEqual(json_response["contractor"], {
+                         'id': 4, 'company_name': 'Nilson Painting'})
         self.assertEqual(json_response["accepted"], True)
 
     def test_delete_bid(self):
@@ -139,6 +144,7 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
+            "contractor": self.contractor.id
         }
 
         # Initiate request and store response
