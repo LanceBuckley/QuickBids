@@ -60,14 +60,15 @@ class BidView(ViewSet):
         Returns:
             Response: A serialized dictionary containing the bid's data and HTTP status 201 Created.
         """
-        contractor = Contractor.objects.get(user=request.auth.user)
+        contractor = Contractor.objects.get(user=request.data["contractor"])
         job = Job.objects.get(pk=request.data["job"])
 
         bid = Bid.objects.create(
             rate=request.data["rate"],
             accepted=False,
             job=job,
-            contractor=contractor
+            contractor=contractor,
+            is_request=request.data["is_request"]
         )
 
         serializer = BidSerializer(bid, many=False)

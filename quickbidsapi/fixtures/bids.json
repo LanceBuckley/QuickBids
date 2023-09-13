@@ -7,7 +7,7 @@
             "job": 1,
             "contractor": 4,
             "accepted": false,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -18,7 +18,7 @@
             "job": 1,
             "contractor": 5,
             "accepted": false,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -29,7 +29,7 @@
             "job": 2,
             "contractor": 6,
             "accepted": true,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -40,7 +40,7 @@
             "job": 4,
             "contractor": 4,
             "accepted": false,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -51,7 +51,7 @@
             "job": 3,
             "contractor": 5,
             "accepted": true,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -62,7 +62,7 @@
             "job": 4,
             "contractor": 6,
             "accepted": false,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -73,7 +73,7 @@
             "job": 5,
             "contractor": 4,
             "accepted": true,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -84,7 +84,7 @@
             "job": 7,
             "contractor": 5,
             "accepted": false,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -95,7 +95,7 @@
             "job": 7,
             "contractor": 6,
             "accepted": false,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -106,7 +106,7 @@
             "job": 8,
             "contractor": 4,
             "accepted": false,
-            "request": true
+            "is_request": true
         }
     },
     {
@@ -117,7 +117,7 @@
             "job": 8,
             "contractor": 5,
             "accepted": false,
-            "request": false
+            "is_request": false
         }
     },
     {
@@ -128,7 +128,7 @@
             "job": 8,
             "contractor": 6,
             "accepted": false,
-            "request": true
+            "is_request": true
         }
     },
     {
@@ -139,7 +139,7 @@
             "job": 6,
             "contractor": 6,
             "accepted": true,
-            "request": false
+            "is_request": false
         }
     }
 ]
