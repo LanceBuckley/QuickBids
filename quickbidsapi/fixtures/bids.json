@@ -6,7 +6,8 @@
             "rate": 19,
             "job": 1,
             "contractor": 4,
-            "accepted": false
+            "accepted": false,
+            "request": false
         }
     },
     {
@@ -16,7 +17,8 @@
             "rate": 20,
             "job": 1,
             "contractor": 5,
-            "accepted": false
+            "accepted": false,
+            "request": false
         }
     },
     {
@@ -26,7 +28,8 @@
             "rate": 18,
             "job": 2,
             "contractor": 6,
-            "accepted": true
+            "accepted": true,
+            "request": false
         }
     },
     {
@@ -36,7 +39,8 @@
             "rate": 22,
             "job": 4,
             "contractor": 4,
-            "accepted": false
+            "accepted": false,
+            "request": false
         }
     },
     {
@@ -46,7 +50,8 @@
             "rate": 23,
             "job": 3,
             "contractor": 5,
-            "accepted": true
+            "accepted": true,
+            "request": false
         }
     },
     {
@@ -56,7 +61,8 @@
             "rate": 22,
             "job": 4,
             "contractor": 6,
-            "accepted": false
+            "accepted": false,
+            "request": false
         }
     },
     {
@@ -66,7 +72,8 @@
             "rate": 19,
             "job": 5,
             "contractor": 4,
-            "accepted": true
+            "accepted": true,
+            "request": false
         }
     },
     {
@@ -76,7 +83,8 @@
             "rate": 21,
             "job": 7,
             "contractor": 5,
-            "accepted": false
+            "accepted": false,
+            "request": false
         }
     },
     {
@@ -86,7 +94,8 @@
             "rate": 17,
             "job": 7,
             "contractor": 6,
-            "accepted": false
+            "accepted": false,
+            "request": false
         }
     },
     {
@@ -96,7 +105,8 @@
             "rate": 19,
             "job": 8,
             "contractor": 4,
-            "accepted": false
+            "accepted": false,
+            "request": true
         }
     },
     {
@@ -106,7 +116,8 @@
             "rate": 19,
             "job": 8,
             "contractor": 5,
-            "accepted": false
+            "accepted": false,
+            "request": false
         }
     },
     {
@@ -116,7 +127,8 @@
             "rate": 19,
             "job": 8,
             "contractor": 6,
-            "accepted": false
+            "accepted": false,
+            "request": true
         }
     },
     {
@@ -126,7 +138,8 @@
             "rate": 19,
             "job": 6,
             "contractor": 6,
-            "accepted": true
+            "accepted": true,
+            "request": false
         }
     }
 ]

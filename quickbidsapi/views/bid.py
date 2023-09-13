@@ -20,6 +20,11 @@ class BidView(ViewSet):
         """
         bids = Bid.objects.all()
 
+        if "contractor" in request.query_params:
+            bids = bids.filter(contractor=request.query_params.get('contractor'))
+        if "accepted" in request.query_params:
+            bids = bids.filter(accepted=request.query_params.get('accepted'))
+
         serializer = BidSerializer(bids, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
