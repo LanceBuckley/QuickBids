@@ -68,7 +68,7 @@ class BidView(ViewSet):
             accepted=False,
             job=job,
             contractor=contractor,
-            is_request=request.data["is_request"]
+            is_request=request.data["is_request"],
         )
 
         serializer = BidSerializer(bid, many=False)
@@ -139,4 +139,4 @@ class BidSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bid
-        fields = ('id', 'rate', 'job', 'contractor', 'accepted')
+        fields = ('id', 'rate', 'job', 'contractor', 'accepted', 'is_request')
