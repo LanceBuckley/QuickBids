@@ -15,10 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.conf.urls import include
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework import routers
-from quickbidsapi.views import (register_user, login_user, ContractorView, FieldView, BidView, JobView)
+from quickbidsapi.views import (
+    register_user, login_user, ContractorView, FieldView, BidView, JobView)
+
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'contractors', ContractorView, 'contractor')
@@ -32,3 +35,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
