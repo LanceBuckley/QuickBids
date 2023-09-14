@@ -26,9 +26,6 @@ class BidView(ViewSet):
             bids = bids.filter(job=request.query_params.get('job'))
         if "accepted" in request.query_params:
             bids = bids.filter(accepted=request.query_params.get('accepted'))
-        
-        if bids.count() == 0:
-            return Response(None, status=status.HTTP_204_NO_CONTENT)
 
         serializer = BidSerializer(bids, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
