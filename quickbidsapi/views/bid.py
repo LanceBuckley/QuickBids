@@ -28,7 +28,7 @@ class BidView(ViewSet):
             bids = bids.filter(accepted=request.query_params.get('accepted'))
         
         if bids.count() == 0:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+            return Response(None, status=status.HTTP_204_NO_CONTENT)
 
         serializer = BidSerializer(bids, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -98,6 +98,7 @@ class BidView(ViewSet):
             bid.contractor = Contractor.objects.get(pk=request.data["contractor"])
             bid.rate = request.data["rate"]
             bid.accepted = request.data["accepted"]
+            bid.is_request = request.data["is_request"]
             bid.save()
             return Response(None, status=status.HTTP_204_NO_CONTENT)
         except Bid.DoesNotExist:
