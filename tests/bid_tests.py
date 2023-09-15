@@ -12,10 +12,24 @@ class BidTests(APITestCase):
                 'jobs', 'fields', 'job_fields', 'bids']
 
     def setUp(self):
-        # Try to retrieve the first existing Contractor object
-        self.contractor = Contractor.objects.first()
+        # Seed the database with a user (use a unique username)
+        user_1 = User.objects.create(username="gatoradephilips", password="password", first_name="Gatorade", last_name="Philips",
+                                     email="gatorade@philips.com", is_staff=False, is_active=True, date_joined="2022-10-21T21:19:24.892Z")
+
+        # Seed the database with a contractor
+        self.sub = Contractor.objects.create(
+            user=user_1, company_name="Philips Gatorade", phone_number="555-3579", primary_contractor=False)
+
+        # Seed the database with a user (use a unique username)
+        user_2 = User.objects.create(username="danielmyers", password="password", first_name="Daniel", last_name="Myers",
+                                     email="daniel@library.com", is_staff=False, is_active=True, date_joined="2022-10-21T21:19:24.892Z")
+
+        # Seed the database with a contractor
+        self.primary = Contractor.objects.create(
+            user=user_2, company_name="Daniel Co", phone_number="555-6543", primary_contractor=True)
         # Create a Token for the user if it doesn't exist
-        token, created = Token.objects.get_or_create(user=self.contractor.user)
+
+        token, created = Token.objects.get_or_create(user=self.sub.user)
         # Set the client's credentials using the Token
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {token.key}")
 
@@ -31,7 +45,8 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
-            "contractor": self.contractor.id,
+            "primary": self.primary.id,
+            "sub": self.sub.id,
             "is_request": False
         }
 
@@ -51,7 +66,9 @@ class BidTests(APITestCase):
             "name": "EyeMasters"
         })
         self.assertEqual(
-            json_response["contractor"], {'id': 1, 'company_name': 'Tanay Building Group'})
+            json_response["primary_contractor"], {'id': 8, 'company_name': 'Daniel Co'})
+        self.assertEqual(
+            json_response["sub_contractor"], {'id': 7, 'company_name': 'Philips Gatorade'})
         self.assertEqual(json_response["accepted"], False)
         self.assertEqual(json_response["is_request"], False)
 
@@ -66,7 +83,8 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
-            "contractor": self.contractor.id,
+            "primary": self.primary.id,
+            "sub": self.sub.id,
             "is_request": False
         }
 
@@ -87,10 +105,12 @@ class BidTests(APITestCase):
         self.assertEqual(json_response["rate"], 17)
         self.assertEqual(json_response["job"], {
             "id": 1,
-            "name": "EyeMasters",
+            "name": "EyeMasters"
         })
         self.assertEqual(
-            json_response["contractor"], {'id': 1, 'company_name': 'Tanay Building Group'})
+            json_response["primary_contractor"], {'id': 8, 'company_name': 'Daniel Co'})
+        self.assertEqual(
+            json_response["sub_contractor"], {'id': 7, 'company_name': 'Philips Gatorade'})
         self.assertEqual(json_response["accepted"], False)
         self.assertEqual(json_response["is_request"], False)
 
@@ -105,7 +125,8 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
-            "contractor": self.contractor.id,
+            "primary": self.primary.id,
+            "sub": self.sub.id,
             "is_request": False
         }
 
@@ -117,8 +138,10 @@ class BidTests(APITestCase):
         data = {
             "rate": 19,
             "job": 3,
-            "contractor": 4,
-            "accepted": True
+            "primary": 2,
+            "sub": 4,
+            "accepted": True,
+            "is_request": False
         }
 
         response = self.client.put(
@@ -134,7 +157,9 @@ class BidTests(APITestCase):
         self.assertEqual(json_response["rate"], 19)
         self.assertEqual(json_response["job"], {
                          'id': 3, 'name': 'OptiNova Solutions'})
-        self.assertEqual(json_response["contractor"], {
+        self.assertEqual(json_response["primary_contractor"], {
+                         'id': 2, 'company_name': 'Ducharme Construction'})
+        self.assertEqual(json_response["sub_contractor"], {
                          'id': 4, 'company_name': 'Nilson Painting'})
         self.assertEqual(json_response["accepted"], True)
         self.assertEqual(json_response["is_request"], False)
@@ -150,7 +175,8 @@ class BidTests(APITestCase):
         data = {
             "rate": 17,
             "job": 1,
-            "contractor": self.contractor.id,
+            "primary": self.primary.id,
+            "sub": self.sub.id,
             "is_request": False
         }
 
