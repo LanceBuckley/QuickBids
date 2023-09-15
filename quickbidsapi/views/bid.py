@@ -19,16 +19,18 @@ class BidView(ViewSet):
             Response: A serialized dictionary and HTTP status 200 OK.
         """
         bids = Bid.objects.all()
-        
-        if "contractor" in request.query_params:
-            bids = bids.filter(contractor=request.query_params.get('contractor'))
+
+        if "sub" in request.query_params:
+            bids = bids.filter(sub_contractor=request.query_params.get('sub'))
+        if "primary" in request.query_params:
+            bids = bids.filter(
+                primary_contractor=request.query_params.get('primary'))
         if "job" in request.query_params:
             bids = bids.filter(job=request.query_params.get('job'))
         if "accepted" in request.query_params:
             bids = bids.filter(accepted=request.query_params.get('accepted'))
         if "request" in request.query_params:
             bids = bids.filter(is_request=request.query_params.get('request'))
-
 
         serializer = BidSerializer(bids, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -65,14 +67,17 @@ class BidView(ViewSet):
         Returns:
             Response: A serialized dictionary containing the bid's data and HTTP status 201 Created.
         """
-        contractor = Contractor.objects.get(user=request.data["contractor"])
+        sub_contractor = Contractor.objects.get(user=request.data["sub"])
+        primary_contractor = Contractor.objects.get(
+            user=request.data["primary"])
         job = Job.objects.get(pk=request.data["job"])
 
         bid = Bid.objects.create(
             rate=request.data["rate"],
             accepted=False,
             job=job,
-            contractor=contractor,
+            sub_contractor=sub_contractor,
+            primary_contractor=primary_contractor,
             is_request=request.data["is_request"],
         )
 
@@ -95,7 +100,9 @@ class BidView(ViewSet):
         try:
             bid = Bid.objects.get(pk=pk)
             bid.job = Job.objects.get(pk=request.data["job"])
-            bid.contractor = Contractor.objects.get(pk=request.data["contractor"])
+            bid.sub_contractor = Contractor.objects.get(pk=request.data["sub"])
+            bid.primary_contractor = Contractor.objects.get(
+                pk=request.data["primary"])
             bid.rate = request.data["rate"]
             bid.accepted = request.data["accepted"]
             bid.is_request = request.data["is_request"]
@@ -141,8 +148,10 @@ class ContractorSerializer(serializers.ModelSerializer):
 class BidSerializer(serializers.ModelSerializer):
 
     job = JobSerializer(many=False)
-    contractor = ContractorSerializer(many=False)
+    primary_contractor = ContractorSerializer(many=False)
+    sub_contractor = ContractorSerializer(many=False)
 
     class Meta:
         model = Bid
-        fields = ('id', 'rate', 'job', 'contractor', 'accepted', 'is_request')
+        fields = ('id', 'rate', 'job', 'primary_contractor',
+                  'sub_contractor', 'accepted', 'is_request',)
