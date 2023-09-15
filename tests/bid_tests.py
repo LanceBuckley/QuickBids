@@ -63,7 +63,10 @@ class BidTests(APITestCase):
         self.assertEqual(json_response["rate"], 17)
         self.assertEqual(json_response["job"], {
             "id": 1,
-            "name": "EyeMasters"
+            "name": "EyeMasters",
+            "contractor_id": 1,
+            "complete": False,
+            "open": True
         })
         self.assertEqual(
             json_response["primary_contractor"], {'id': 8, 'company_name': 'Daniel Co'})
@@ -105,7 +108,10 @@ class BidTests(APITestCase):
         self.assertEqual(json_response["rate"], 17)
         self.assertEqual(json_response["job"], {
             "id": 1,
-            "name": "EyeMasters"
+            "name": "EyeMasters",
+            "contractor_id": 1,
+            "complete": False,
+            "open": True
         })
         self.assertEqual(
             json_response["primary_contractor"], {'id': 8, 'company_name': 'Daniel Co'})
@@ -156,7 +162,7 @@ class BidTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(json_response["rate"], 19)
         self.assertEqual(json_response["job"], {
-                         'id': 3, 'name': 'OptiNova Solutions'})
+                         'id': 3, 'name': 'OptiNova Solutions', 'contractor_id': 1, 'complete': False, 'open': False})
         self.assertEqual(json_response["primary_contractor"], {
                          'id': 2, 'company_name': 'Ducharme Construction'})
         self.assertEqual(json_response["sub_contractor"], {
