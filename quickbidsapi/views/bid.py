@@ -136,7 +136,7 @@ class BidView(ViewSet):
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
-        fields = ('id', 'name',)
+        fields = ('id', 'name', 'contractor_id', 'complete', 'open')
 
 
 class ContractorSerializer(serializers.ModelSerializer):
