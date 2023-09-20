@@ -99,7 +99,7 @@ def register_user(request):
         # Use the REST Framework's token generator on the new user account
         token = Token.objects.create(user=account.user)
         # Return the token to the client
-        data = {'token': token.key, 'staff': new_user.is_staff, 'valid': True}
+        data = {'token': token.key, 'staff': new_user.is_staff, 'primary': account.primary_contractor, 'valid': True}
         return Response(data)
 
     return Response({'message': 'You must provide email, password, first_name, last_name, and username'}, status=status.HTTP_400_BAD_REQUEST)
