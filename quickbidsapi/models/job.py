@@ -7,7 +7,6 @@ class Job(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=100)
     fields = models.ManyToManyField("Field", through='JobField')
-    blueprint = models.ImageField(upload_to='blueprints/', null=True, blank=True)
     square_footage = models.FloatField(null=True, blank=True)
     open = models.BooleanField(null=True, blank=True)
     complete = models.BooleanField(null=True, blank=True)

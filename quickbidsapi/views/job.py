@@ -21,7 +21,8 @@ class JobView(ViewSet):
         jobs = Job.objects.all()
 
         if "contractor" in request.query_params:
-            jobs = jobs.filter(contractor=request.query_params.get('contractor'))
+            jobs = jobs.filter(
+                contractor=request.query_params.get('contractor'))
         if request.query_params.get('open') is not None:
             if request.query_params.get('open') == 'true':
                 jobs = jobs.filter(open=True)
@@ -82,7 +83,6 @@ class JobView(ViewSet):
             contractor=contractor,
             name=request.data["name"],
             address=request.data["address"],
-            blueprint=request.data["blueprint"],
             square_footage=request.data["square_footage"],
             open=True,
             complete=False,
@@ -113,7 +113,6 @@ class JobView(ViewSet):
                 pk=request.data["contractor"])
             job.name = request.data["name"]
             job.address = request.data["address"]
-            job.blueprint = request.data["blueprint"]
             job.square_footage = request.data["square_footage"]
             job.open = request.data["open"]
             job.complete = request.data["complete"]
@@ -165,4 +164,4 @@ class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
         fields = ('id', 'contractor', 'fields', 'name', 'address',
-                  'blueprint', 'square_footage', 'open', 'complete',)
+                  'square_footage', 'open', 'complete',)

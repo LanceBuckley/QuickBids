@@ -35,7 +35,6 @@ class JobTests(APITestCase):
             "fields": [1, 2, 3],
             "name": "Test Job",
             "address": "123 Testing Rd.",
-            "blueprint": "",
             "square_footage": 1700
         }
 
@@ -58,7 +57,6 @@ class JobTests(APITestCase):
             [{"id": 1, "job_title": "Painting"}, {"id": 2, "job_title": "Drywall"},
                 {"id": 3, "job_title": "Epoxy Flooring"}]
         )
-        self.assertEqual(json_response["blueprint"], None)
         self.assertEqual(json_response["square_footage"], 1700)
         self.assertEqual(json_response["open"], True)
         self.assertEqual(json_response["complete"], False)
@@ -77,7 +75,6 @@ class JobTests(APITestCase):
             "fields": [1, 2, 3],
             "name": "Test Job",
             "address": "123 Testing Rd.",
-            "blueprint": "",
             "square_footage": 1700
         }
 
@@ -104,7 +101,6 @@ class JobTests(APITestCase):
             [{"id": 1, "job_title": "Painting"}, {"id": 2, "job_title": "Drywall"},
                 {"id": 3, "job_title": "Epoxy Flooring"}]
         )
-        self.assertEqual(json_response["blueprint"], None)
         self.assertEqual(json_response["square_footage"], 1700.0)
         self.assertEqual(json_response["open"], True)
         self.assertEqual(json_response["complete"], False)
@@ -123,7 +119,6 @@ class JobTests(APITestCase):
             "fields": [1, 2, 3],
             "name": "Test Job",
             "address": "123 Testing Rd.",
-            "blueprint": "",
             "square_footage": 1700
         }
 
@@ -137,7 +132,6 @@ class JobTests(APITestCase):
             "fields": [4, 5, 6],
             "name": "New Job",
             "address": "456 Testing Dr.",
-            "blueprint": "",
             "square_footage": 1900,
             "complete": True,
             "open": False
@@ -156,7 +150,6 @@ class JobTests(APITestCase):
         self.assertEqual(json_response["address"], "456 Testing Dr.")
         self.assertEqual(
             json_response["contractor"], {"id": 3, "company_name": "Sole Builders"})
-        self.assertEqual(json_response["blueprint"], None)
         self.assertEqual(json_response["square_footage"], 1900.0)
         self.assertEqual(json_response["open"], False)
         self.assertEqual(json_response["complete"], True)
@@ -175,7 +168,6 @@ class JobTests(APITestCase):
             "fields": [1, 2, 3],
             "name": "Test Job",
             "address": "123 Testing Rd.",
-            "blueprint": "",
             "square_footage": 1700
         }
 

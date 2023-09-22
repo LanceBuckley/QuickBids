@@ -6,7 +6,6 @@
             "contractor": 1,
             "name": "EyeMasters",
             "address": "321 Iris Boulevard",
-            "blueprint": "",
             "square_footage": 2500,
             "open": true,
             "complete": false
@@ -19,7 +18,6 @@
             "contractor": 1,
             "name": "SparkleDent",
             "address": "555 Cavity Circle",
-            "blueprint": "",
             "square_footage": 3200,
             "open": false,
             "complete": true
@@ -32,7 +30,6 @@
             "contractor": 1,
             "name": "OptiNova Solutions",
             "address": "111 Optics Avenue",
-            "blueprint": "",
             "square_footage": 1800,
             "open": false,
             "complete": false
@@ -45,7 +42,6 @@
             "contractor": 2,
             "name": "GreenThumb Landscaping",
             "address": "789 Garden Lane",
-            "blueprint": "",
             "square_footage": 6500,
             "open": true,
             "complete": false
@@ -58,7 +54,6 @@
             "contractor": 2,
             "name": "Bookworm Haven Bookstore",
             "address": "555 Literary Street",
-            "blueprint": "",
             "square_footage": 1300,
             "open": false,
             "complete": true
@@ -71,7 +66,6 @@
             "contractor": 2,
             "name": "Purrfect Pet Grooming",
             "address": "321 Furry Drive",
-            "blueprint": "",
             "square_footage": 1400,
             "open": false,
             "complete": true
@@ -84,7 +78,6 @@
             "contractor": 3,
             "name": "FitZone Gym & Fitness",
             "address": "234 Health Street",
-            "blueprint": "",
             "square_footage": 2400,
             "open": true,
             "complete": false
@@ -97,7 +90,6 @@
             "contractor": 3,
             "name": "FashionFlare Boutique",
             "address": "567 Style Boulevard",
-            "blueprint": "",
             "square_footage": 1900,
             "open": true,
             "complete": false
