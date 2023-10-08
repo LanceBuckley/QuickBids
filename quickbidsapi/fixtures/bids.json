@@ -136,7 +136,7 @@
         "pk": 12,
         "fields": {
             "rate": 19,
-            "job_field": 15,
+            "job_field": 11,
             "primary_contractor": 3,
             "sub_contractor": 6,
             "accepted": false,
@@ -148,7 +148,7 @@
         "pk": 13,
         "fields": {
             "rate": 19,
-            "job_field": 16,
+            "job_field": 12,
             "primary_contractor": 2,
             "sub_contractor": 6,
             "accepted": true,

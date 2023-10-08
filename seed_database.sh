@@ -9,6 +9,6 @@ python3 manage.py loaddata users
 python3 manage.py loaddata tokens
 python3 manage.py loaddata contractors
 python3 manage.py loaddata jobs
-python3 manage.py loaddata bids
 python3 manage.py loaddata fields
 python3 manage.py loaddata job_fields
+python3 manage.py loaddata bids
