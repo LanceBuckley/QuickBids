@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
-from quickbidsapi.models import Bid, Job, Contractor
+from quickbidsapi.models import Bid, Job, Contractor, JobField
 
 
 class BidView(ViewSet):
@@ -26,7 +26,7 @@ class BidView(ViewSet):
             bids = bids.filter(
                 primary_contractor=request.query_params.get('primary'))
         if "job" in request.query_params:
-            bids = bids.filter(job=request.query_params.get('job'))
+            bids = bids.filter(job_field__job_id=request.query_params.get('job'))
         if "accepted" in request.query_params:
             bids = bids.filter(accepted=request.query_params.get('accepted'))
         if "request" in request.query_params:
@@ -70,12 +70,12 @@ class BidView(ViewSet):
         sub_contractor = Contractor.objects.get(user=request.data["sub"])
         primary_contractor = Contractor.objects.get(
             user=request.data["primary"])
-        job = Job.objects.get(pk=request.data["job"])
+        job_field = JobField.objects.get(pk=request.data["job"])
 
         bid = Bid.objects.create(
             rate=request.data["rate"],
             accepted=False,
-            job=job,
+            job_field=job_field,
             sub_contractor=sub_contractor,
             primary_contractor=primary_contractor,
             is_request=request.data["is_request"],
@@ -99,7 +99,7 @@ class BidView(ViewSet):
         """
         try:
             bid = Bid.objects.get(pk=pk)
-            bid.job = Job.objects.get(pk=request.data["job"])
+            bid.job_field = JobField.objects.get(pk=request.data["job"])
             bid.sub_contractor = Contractor.objects.get(pk=request.data["sub"])
             bid.primary_contractor = Contractor.objects.get(
                 pk=request.data["primary"])
@@ -138,6 +138,13 @@ class JobSerializer(serializers.ModelSerializer):
         model = Job
         fields = ('id', 'name', 'contractor_id', 'complete', 'open')
 
+class JobFieldSerializer(serializers.ModelSerializer):
+
+    job_id = JobSerializer(many=False)
+
+    class Meta:
+        model = JobField
+        fields = ('id', 'field_id', 'job_id',)
 
 class ContractorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -147,11 +154,11 @@ class ContractorSerializer(serializers.ModelSerializer):
 
 class BidSerializer(serializers.ModelSerializer):
 
-    job = JobSerializer(many=False)
+    job_field = JobFieldSerializer(many=False)
     primary_contractor = ContractorSerializer(many=False)
     sub_contractor = ContractorSerializer(many=False)
 
     class Meta:
         model = Bid
-        fields = ('id', 'rate', 'job', 'primary_contractor',
+        fields = ('id', 'rate', 'job_field', 'primary_contractor',
                   'sub_contractor', 'accepted', 'is_request',)
