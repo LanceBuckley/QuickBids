@@ -4,7 +4,7 @@
         "pk": 1,
         "fields": {
             "rate": 19,
-            "job": 1,
+            "job_field": 1,
             "primary_contractor": 1,
             "sub_contractor": 4,
             "accepted": false,
@@ -16,7 +16,7 @@
         "pk": 2,
         "fields": {
             "rate": 20,
-            "job": 1,
+            "job_field": 2,
             "primary_contractor": 1,
             "sub_contractor": 5,
             "accepted": false,
@@ -28,7 +28,7 @@
         "pk": 3,
         "fields": {
             "rate": 18,
-            "job": 2,
+            "job_field": 2,
             "primary_contractor": 1,
             "sub_contractor": 6,
             "accepted": true,
@@ -40,7 +40,7 @@
         "pk": 4,
         "fields": {
             "rate": 22,
-            "job": 4,
+            "job_field": 3,
             "primary_contractor": 2,
             "sub_contractor": 4,
             "accepted": false,
@@ -52,7 +52,7 @@
         "pk": 5,
         "fields": {
             "rate": 23,
-            "job": 3,
+            "job_field": 4,
             "primary_contractor": 1,
             "sub_contractor": 5,
             "accepted": true,
@@ -64,7 +64,7 @@
         "pk": 6,
         "fields": {
             "rate": 22,
-            "job": 4,
+            "job_field": 5,
             "primary_contractor": 2,
             "sub_contractor": 6,
             "accepted": false,
@@ -76,7 +76,7 @@
         "pk": 7,
         "fields": {
             "rate": 19,
-            "job": 5,
+            "job_field": 3,
             "primary_contractor": 2,
             "sub_contractor": 4,
             "accepted": true,
@@ -88,7 +88,7 @@
         "pk": 8,
         "fields": {
             "rate": 21,
-            "job": 7,
+            "job_field": 6,
             "primary_contractor": 3,
             "sub_contractor": 5,
             "accepted": false,
@@ -100,7 +100,7 @@
         "pk": 9,
         "fields": {
             "rate": 17,
-            "job": 7,
+            "job_field": 7,
             "primary_contractor": 3,
             "sub_contractor": 6,
             "accepted": false,
@@ -112,7 +112,7 @@
         "pk": 10,
         "fields": {
             "rate": 19,
-            "job": 8,
+            "job_field": 11,
             "primary_contractor": 3,
             "sub_contractor": 4,
             "accepted": false,
@@ -124,7 +124,7 @@
         "pk": 11,
         "fields": {
             "rate": 19,
-            "job": 8,
+            "job_field": 9,
             "primary_contractor": 3,
             "sub_contractor": 5,
             "accepted": false,
@@ -136,7 +136,7 @@
         "pk": 12,
         "fields": {
             "rate": 19,
-            "job": 8,
+            "job_field": 15,
             "primary_contractor": 3,
             "sub_contractor": 6,
             "accepted": false,
@@ -148,7 +148,7 @@
         "pk": 13,
         "fields": {
             "rate": 19,
-            "job": 6,
+            "job_field": 16,
             "primary_contractor": 2,
             "sub_contractor": 6,
             "accepted": true,
