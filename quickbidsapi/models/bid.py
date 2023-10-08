@@ -3,8 +3,7 @@ from django.db import models
 
 class Bid(models.Model):
     rate = models.FloatField(null=True, blank=True)
-    job = models.ForeignKey(
-        "Job", on_delete=models.CASCADE, related_name="bids")
+    job_field = models.OneToOneField("JobField", on_delete=models.CASCADE)
     primary_contractor = models.ForeignKey(
         "Contractor", on_delete=models.CASCADE, related_name="my_requests")
     sub_contractor = models.ForeignKey(
