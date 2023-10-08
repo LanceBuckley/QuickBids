@@ -140,11 +140,11 @@ class JobSerializer(serializers.ModelSerializer):
 
 class JobFieldSerializer(serializers.ModelSerializer):
 
-    job_id = JobSerializer(many=False)
+    job = JobSerializer(many=False)
 
     class Meta:
         model = JobField
-        fields = ('id', 'field_id', 'job_id',)
+        fields = ('id', 'field', 'job',)
 
 class ContractorSerializer(serializers.ModelSerializer):
     class Meta:
